@@ -10,7 +10,7 @@ app.use(express.json());
 
 //Environment variables
 require('dotenv').config();
-const port = process.env.PORT || 5000;
+const port = process.env.SERVE_PORT || 5000;
 const uri = process.env.DB_URI;
 
 if (process.env.NODE_ENV === 'production') {
