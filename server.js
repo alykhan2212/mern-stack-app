@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const mongoose = require('mongoose');
 
 //App configuration
@@ -12,9 +13,9 @@ require('dotenv').config();
 const port = process.env.PORT || 5000;
 const uri = process.env.DB_URI;
 
-// if(process.env.NODE_ENV === 'production'){
-//     app.use(express.static(''))
-// }
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname,'/client/build')))
+}
 
 
 //Database connection
