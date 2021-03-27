@@ -11,7 +11,7 @@ function Home() {
     }
 
     useEffect(() => {
-        axios.get('http://localhost:5000/posts')
+        axios.get('/posts')
             .then(response => {
                 setPosts({ posts: response.data});
                 
@@ -22,7 +22,7 @@ function Home() {
     }, []);
 
     function deletePost(id) {
-        axios.delete('http://localhost:5000/posts/' + id)
+        axios.delete('/posts/' + id)
             .then(response => { console.log(response.data) });
 
         setPosts({
