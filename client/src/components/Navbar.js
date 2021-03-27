@@ -30,7 +30,10 @@ function Navbar() {
             <Link to="/" className="nav-link">Home</Link>
           </li>
           <li className="navbar-item">
-            <Link to="/create" className="nav-link">Create Post</Link>
+            <Link to="/create-post" className="nav-link">Create Post</Link>
+          </li>
+          <li className="navbar-item">
+            <Link to="/create-categories" className="nav-link">Create Categories</Link>
           </li>
         </ul>
       </div>

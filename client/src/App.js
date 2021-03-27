@@ -5,6 +5,7 @@ import Home from './components/Home';
 import CreatePost from "./components/CreatePost";
 import EditPost from "./components/EditPost";
 import SinglePost from "./components/SinglePost";
+import CreateCategories from "./components/CreateCategories"
 import "./App.css";
 
 function App() {
@@ -14,9 +15,10 @@ function App() {
       <div className="container">
         <br />
         <Route path="/" exact component={Home} />
-        <Route path="/create" exact component={CreatePost} />
+        <Route path="/create-post" exact component={CreatePost} />
         <Route path="/edit/:id" exact component={EditPost} />
         <Route path="/single/:id" exact component={SinglePost} />
+        <Route path="/create-categories" exact component={CreateCategories} />
       </div>
     </Router>
   );

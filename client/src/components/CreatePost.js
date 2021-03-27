@@ -29,7 +29,7 @@ function CreatePost() {
 
     return (
         <div className="container mt-5">
-            <h3>Create New Post</h3>
+            <h3>Create Post</h3>
             <div className="row">
                 <div className="col-lg-6">
                     <form onSubmit={onFormSubmit}>
@@ -65,7 +65,7 @@ function CreatePost() {
                             </textarea>
                         </div>
                         <div className="form-group">
-                            <input type="submit" value="Submit" className="btn btn-primary" />
+                            <input type="submit" value="Submit" className="btn btn-dark" />
                         </div>
 
                     </form>
