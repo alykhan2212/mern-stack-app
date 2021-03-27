@@ -12,7 +12,7 @@ function PostsComponent(props) {
 
     return (
         <div className="col-sm-6 col-md-4 col-lg-4">
-            <div className="card mt-1">
+            <div className="card mt-3">
                 <div className="card-block">
                     <h4 className="card-title">The post title</h4>
                     <div className="meta">
