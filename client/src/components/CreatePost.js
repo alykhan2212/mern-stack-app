@@ -3,11 +3,11 @@ import axios from 'axios';
 
 function CreatePost() {
 
-    const [post, setPost] = useState({ email: '', description: '' });
-    const [users, setUsers] = useState({ users: [] });
+    const [post, setPost] = useState({ email: '', title:'' , description: '' });
+    const [allusers, setUsers] = useState({ users: [] });
 
     useEffect(() => {
-        axios.get('/users')
+        axios.get('http://localhost:5000/users')
             .then(response => {
                 setUsers({ users: response.data.map(user => user.email) });
                 setPost({ email: response.data[0].email });
@@ -15,12 +15,12 @@ function CreatePost() {
             .catch((error) => {
                 console.log(error);
             })
-
+            console.log('update')
     }, []);
 
     function onFormSubmit(e) {
         e.preventDefault();
-        axios.post('/posts/add', post)
+        axios.post('http://localhost:5000/posts/add', post)
             .then(res => console.log(res.data))
 
         window.location = '/';
@@ -41,7 +41,7 @@ function CreatePost() {
                                 onChange={e => setPost(post => ({ ...post, email: e.target.value }))}
                             >
                                 {
-                                    users.users.map(function (user) {
+                                    allusers.users.map(function (user) {
                                         return <option
                                             key={user}
                                             value={user}>{user}
@@ -51,15 +51,21 @@ function CreatePost() {
                             </select>
                         </div>
                         <div className="form-group">
-                            <label>Description: </label>
-                            <input type="text"
-                                required
-                                className="form-control"
-                                onChange={e => setPost(post => ({ ...post, description: e.target.value }))}
-                            />
+                            <label>Title: </label>
+                            <input type="text" className="form-control"/>
                         </div>
                         <div className="form-group">
-                            <input type="submit" value="Create Exercise Log" className="btn btn-primary" />
+                            <label>Description: </label>
+                            <textarea
+                                required
+                                rows="5"
+                                className="form-control"
+                                onChange={e => setPost(post => ({ ...post, description: e.target.value }))}
+                            >
+                            </textarea>
+                        </div>
+                        <div className="form-group">
+                            <input type="submit" value="Submit" className="btn btn-primary" />
                         </div>
 
                     </form>

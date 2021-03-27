@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function PostsComponent(props) {
+function PostsCard(props) {
 
     function formatDate(date) {
         date = new Date(date)
@@ -38,4 +38,4 @@ function PostsComponent(props) {
 
 }
 
-export default PostsComponent;
+export default PostsCard;

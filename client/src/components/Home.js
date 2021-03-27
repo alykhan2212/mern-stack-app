@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import PostsComponent from './PostsComponent';
+import PostsCard from './PostsCard';
 
 function Home() {
 
@@ -11,7 +11,7 @@ function Home() {
     }
 
     useEffect(() => {
-        axios.get('/posts')
+        axios.get('http://localhost:5000/posts')
             .then(response => {
                 setPosts({ posts: response.data});
                 
@@ -22,7 +22,7 @@ function Home() {
     }, []);
 
     function deletePost(id) {
-        axios.delete('/posts/' + id)
+        axios.delete('http://localhost:5000/posts/' + id)
             .then(response => { console.log(response.data) });
 
         setPosts({
@@ -39,7 +39,7 @@ function Home() {
             <div className="row">
                 {
                     postsList.posts.map(posts => {
-                        return <PostsComponent
+                        return <PostsCard
                             deletePost={deletePost}
                             key={posts._id}
                             email={posts.email}
