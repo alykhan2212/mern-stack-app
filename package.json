@@ -9,7 +9,8 @@
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
     "start": "node server.js",
-    "client": "cd client && npm start"
+    "client": "cd client && npm start",
+    "dev": "nodemon src/server"
   },
   "author": "Ali khan",
   "license": "ISC",
@@ -19,5 +20,8 @@
     "express": "^4.17.1",
     "mongoose": "^5.11.15",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }

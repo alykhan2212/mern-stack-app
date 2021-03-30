@@ -4,7 +4,7 @@ let Post = require('../models/posts.model');
 
 
 //Get posts
-router.get('/', function (req, res) {
+router.get('/', function (req, res, next) {
     Post.find()
         .then(posts => res.json(posts))
         .catch(err => res.status(400).json('Error ' + err));
@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
 });
 
 //Add post
-router.post('/add', function (req, res) {
+router.post('/add', function (req, res, next) {
     const email = req.body.email;
     const description = req.body.description;
 
@@ -24,24 +24,15 @@ router.post('/add', function (req, res) {
 });
 
 //Find post by id
-router.get('/:id', function (req, res) {
+router.get('/:id', function (req, res, next) {
     Post.findById(req.params.id)
         .then(posts => res.json(posts))
         .catch(err => res.status(400).json('Error ' + err));
 
 });
 
-//Find and delete post by id
-router.delete('/:id', function (req, res) {
-    Post.findByIdAndDelete(req.params.id)
-        .then(() => res.json("Deleted"))
-        .catch(err => res.status(400).json('Error ' + err));
-
-});
-
-
 //update post
-router.put('/update/:id', function (req, res) {
+router.patch('/:id', function (req, res, next) {
     Post.findById(req.params.id)
         .then(posts => {
             posts.description = req.body.description;
@@ -53,5 +44,16 @@ router.put('/update/:id', function (req, res) {
         .catch(err => res.status(400).json('Error ' + err));
     
 });
+
+//Find and delete post by id
+router.delete('/:id', function (req, res, next) {
+    Post.findByIdAndDelete(req.params.id)
+        .then(() => res.json("Deleted"))
+        .catch(err => res.status(400).json('Error ' + err));
+
+});
+
+
+
 
 module.exports = router;

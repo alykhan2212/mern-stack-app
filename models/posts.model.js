@@ -3,8 +3,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
-    email: { type: String, required: true },
-    description: { type: String, required: true },
+    username: { type: String, required: [true , 'username is required']},
+    title: { type: String, max: 80 , required: [true , 'Pots title is required'] },
+    cat: { type: String },
+    desc: { type: String, max: 500 , required: [true , 'Post description is required'] },
+    
 
 },
     {
