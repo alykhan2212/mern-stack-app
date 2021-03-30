@@ -7,6 +7,7 @@ let User = require('../models/user.model');
 //Get users
 router.get('/', function (req, res, next) {
     User.find()
+        .select('-__v -updatedAt')
         .then(response => res.status(200).json(response))
         .catch(err => res.status(500).json({ error: err }))
 
@@ -16,6 +17,7 @@ router.get('/', function (req, res, next) {
 router.get('/:userId', function (req, res, next) {
 
     User.findById(req.params.userId)
+        .select('-__v ')
         .then(response => {
             if (response) {
                 res.status(200).json(response)
@@ -38,9 +40,14 @@ router.post('/', function (req, res, next) {
         email: req.body.email
     });
     newUser.save()
-        .then(() => res.status(200).json({
+        .then(response => res.status(201).json({
             message: 'user has been created successfully',
-            createdUser: newUser
+            createdUser: {
+                _id: response._id,
+                username: response.username,
+                email: response.email,
+                createdAt: response.createdAt
+            }
         }))
         .catch(err => res.status(400).json({ error: err }));
 });
