@@ -1,11 +1,11 @@
 const express = require('express');
-var router = express.Router();
+const router = express.Router();
 const mongoose = require('mongoose');
-let User = require('../models/user.model');
+const User = require('../models/user.model');
 
 
 //Get users
-router.get('/', function (req, res, next) {
+router.get('/', (req, res, next) => {
     User.find()
         .select('-__v -updatedAt')
         .then(response => res.status(200).json(response))
@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
 });
 
 //Find specific user
-router.get('/:userId', function (req, res, next) {
+router.get('/:userId', (req, res, next) => {
 
     User.findById(req.params.userId)
         .select('-__v ')
@@ -30,12 +30,11 @@ router.get('/:userId', function (req, res, next) {
         .catch(err => res.status(404).json({ error: err }))
 });
 
-
 //Add user
-router.post('/', function (req, res, next) {
+router.post('/', (req, res, next) => {
 
     const newUser = new User({
-        _id: new mongoose.Types.ObjectId,
+        _id: mongoose.Types.ObjectId(),
         username: req.body.username,
         email: req.body.email
     });
@@ -53,11 +52,12 @@ router.post('/', function (req, res, next) {
 });
 
 //update user
-router.patch('/:userId', function (req, res, next) {
+router.patch('/:userId', (req, res, next) => {
     User.findById(req.params.userId)
         .then(response => {
-            response.username = req.body.username;
-            response.email = req.body.email;
+
+            response.username = req.body.username ? req.body.username : response.username;
+            response.email = req.body.email ? req.body.email : response.email;
 
             response.save()
                 .then(() => res.status(200).json({
@@ -69,7 +69,7 @@ router.patch('/:userId', function (req, res, next) {
 });
 
 //Delete user
-router.delete('/:userId', function (req, res, next) {
+router.delete('/:userId', (req, res, next) => {
     User.deleteOne({ _id: req.params.userId })
         .then(resp => {
             if (resp.deletedCount > 0) {
@@ -85,8 +85,5 @@ router.delete('/:userId', function (req, res, next) {
         })
         .catch(err => res.status(400).json({ error: err }));
 });
-
-
-
 
 module.exports = router;

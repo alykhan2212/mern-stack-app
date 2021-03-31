@@ -1,14 +1,27 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
-
-const postSchema = new Schema({
-    username: { type: String, required: [true , 'username is required']},
-    title: { type: String, max: 80 , required: [true , 'Pots title is required'] },
-    cat: { type: String },
-    desc: { type: String, max: 500 , required: [true , 'Post description is required'] },
-    
-
+const postSchema = mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    title: {
+        type: String,
+        required: [true, 'Pots title is required'],
+        trim: true
+    },
+    category: {
+        type: String,
+        default: 'uncategorized',
+        trim: true
+    },
+    description: {
+        type: String,
+        required: [true, 'Post description is required'],
+        trim: true
+    },
 },
     {
         timestamps: true,
@@ -16,6 +29,5 @@ const postSchema = new Schema({
 
 );
 
-const Post = mongoose.model("Post", postSchema);
 
-module.exports = Post;
+module.exports = mongoose.model("Post", postSchema);
