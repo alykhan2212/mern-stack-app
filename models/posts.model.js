@@ -22,6 +22,9 @@ const postSchema = mongoose.Schema({
         required: [true, 'Post description is required'],
         trim: true
     },
+    postImage: {
+        type: String
+    },
 },
     {
         timestamps: true,

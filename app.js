@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json()); // replace body-parser middleware
 app.use(express.urlencoded({extended:false}));
-
+app.use('/uploads',express.static('uploads'));
 
 const usersRoute = require('./routers/users');
 const postsRoute = require('./routers/posts');

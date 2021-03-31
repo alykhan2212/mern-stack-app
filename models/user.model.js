@@ -13,9 +13,12 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        trim: true,
-        minLength: 5
+        match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     },
+    password: {
+        type: String,
+        required: true
+    }
 },
     {
         timestamps: true,
