@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const crypto = require("crypto");
+const isAuthorized = require('../middleware/authenticate');
 
 //Multer configuration
 const multer = require('multer');

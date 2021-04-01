@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const bcrypt = require("bcrypt");
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
-
+const isAuthorized = require('../middleware/authenticate');
 
 //Get users
-router.get('/', (req, res, next) => {
+router.get('/' , (req, res, next) => {
     User.find()
         .select('-__v -updatedAt')
         .then(response => res.status(200).json(response))
