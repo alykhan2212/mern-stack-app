@@ -5,7 +5,7 @@ function SinglePost(props) {
     const [fullPost, setFullPost] = useState({ description: '' });
 
     useEffect(() => {
-        axios.get('http://localhost:5000/posts/'+ props.match.params.id)
+        axios.get('/posts/'+ props.match.params.id)
             .then(response => {
                 setFullPost({ description: response.data.description });
             })
