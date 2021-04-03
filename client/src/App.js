@@ -17,7 +17,7 @@ function App() {
         <Route path="/" exact component={Home} />
         <Route path="/create-post" exact component={CreatePost} />
         <Route path="/edit/:id" exact component={EditPost} />
-        <Route path="/:id" exact component={SinglePost} />
+        <Route path="/single/:id" exact component={SinglePost} />
         <Route path="/create-categories" exact component={CreateCategories} />
       </div>
     </Router>
