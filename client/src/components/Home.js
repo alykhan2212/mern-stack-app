@@ -42,7 +42,6 @@ function Home() {
                         return <PostsCard
                             deletePost={deletePost}
                             key={posts._id}
-                            email={posts.email}
                             date={posts.createdAt}
                             description={lessLength(posts.description)}
                             id={posts._id} />;

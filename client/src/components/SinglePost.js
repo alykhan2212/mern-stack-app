@@ -7,7 +7,8 @@ function SinglePost(props) {
     useEffect(() => {
         axios.get('api/posts/'+ props.match.params.id)
             .then(response => {
-                setFullPost({ description: response.data.description });
+                console.log(response)
+                // setFullPost({ description: response.data.description });
             })
             .catch((error) => {
                 console.log(error);
