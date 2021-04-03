@@ -29,7 +29,7 @@ function PostsCard(props) {
                     <div className="card-text">
                         <Link to={"/edit/" + props.id} className="card-link">Edit</Link>
                         <a href="/#" className="card-link" onClick={() => { props.deletePost(props.id) }}>Delete</a>
-                        <Link to={"/single/" + props.id} className="btn btn-dark float-right btn-sm">Read More</Link>
+                        <Link to={"/" + props.id} className="btn btn-dark float-right btn-sm">Read More</Link>
                     </div>
                 </div>
             </div>
