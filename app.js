@@ -16,10 +16,8 @@ app.use('/uploads',express.static('uploads'));
 
 const usersRoute = require('./routers/users');
 const postsRoute = require('./routers/posts');
-const apiMain = require('./routers/apiMain');
 
 //Routes
-app.use('/api', apiMain);
 app.use('/api/users', usersRoute);
 app.use('/api/posts', postsRoute);
 
