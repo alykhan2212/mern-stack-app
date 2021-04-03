@@ -5,7 +5,7 @@ function SinglePost(props) {
     const [fullPost, setFullPost] = useState({ description: '' });
 
     useEffect(() => {
-        axios.get('api/posts/'+ props.match.params.id)
+        axios.get('api/posts/'+ props.match.params.postId)
             .then(response => {
                 console.log(response)
                 // setFullPost({ description: response.data.description });
@@ -14,7 +14,7 @@ function SinglePost(props) {
                 console.log(error);
             })
 
-    }, [props.match.params.id]);
+    }, [props.match.params.postId]);
 
     return (
         <div className="container mt-5">

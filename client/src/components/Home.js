@@ -44,7 +44,7 @@ function Home() {
                             key={posts._id}
                             date={posts.createdAt}
                             description={lessLength(posts.description)}
-                            id={posts._id} />;
+                            postId={posts._id} />;
                     })
                 }
             </div>
