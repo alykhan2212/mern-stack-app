@@ -6,8 +6,23 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
 const isAuthorized = require('../middleware/authenticate');
 
+
+//Create Token
+const createToken = (email, userid) => {
+    return jwt.sign(
+        {
+            email: email,
+            userId: userid
+        },
+        process.env.JWT_KEY,
+        {
+            expiresIn: "1h"
+        })
+}
+
+
 //Get users
-router.get('/' , (req, res, next) => {
+router.get('/',  (req, res, next) => {
     User.find()
         .select('-__v -updatedAt')
         .then(response => res.status(200).json(response))
@@ -17,7 +32,7 @@ router.get('/' , (req, res, next) => {
 
 //Get users
 router.post('/login', (req, res, next) => {
-    
+
     User.findOne({ email: req.body.email })
         .then(response => {
             if (!response) {
@@ -28,23 +43,14 @@ router.post('/login', (req, res, next) => {
                     return res.status(401).json({ message: 'Auth failed' });
                 }
                 if (result) {
-                    const token = jwt.sign(
-                        {
-                            email: response.email,
-                            userId: response._id
-                        },
-                        process.env.JWT_KEY,
-                        {
-                            expiresIn: "1h"
-                        }
 
-                    );
+                    const token = createToken(response.email, response._id);
+                    res.cookie('jwt', token, { httpOnly: true, maxAge: 60 * 60 });
 
-                    return res.status(200).json({ message: 'Auth successful', token: token });
+                    return res.status(200).json({ message: 'Auth successful' });
                 }
                 res.status(401).json({ message: 'Auth failed' });
             });
-            // res.status(200).json(response)
         })
         .catch(err => res.status(500).json({ error: err }))
 
@@ -52,7 +58,7 @@ router.post('/login', (req, res, next) => {
 
 //Find specific user
 router.get('/:userId', (req, res, next) => {
-
+    
     User.findById(req.params.userId)
         .select('-__v ')
         .then(response => {

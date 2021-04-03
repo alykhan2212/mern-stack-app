@@ -3,12 +3,15 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const cookieParser = require('cookie-parser');
+
 require('./database');
 
 const app = express();
 app.use(cors());
 app.use(express.json()); // replace body-parser middleware
 app.use(express.urlencoded({extended:false}));
+app.use(cookieParser());
 app.use('/uploads',express.static('uploads'));
 
 const usersRoute = require('./routers/users');
