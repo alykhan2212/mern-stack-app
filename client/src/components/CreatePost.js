@@ -7,7 +7,7 @@ function CreatePost() {
     const [allusers, setUsers] = useState({ users: [] });
 
     useEffect(() => {
-        axios.get('/users')
+        axios.get('/api/users/')
             .then(response => {
                 setUsers({ users: response.data.map(user => user.email) });
                 setPost({ email: response.data[0].email });
@@ -20,7 +20,7 @@ function CreatePost() {
 
     function onFormSubmit(e) {
         e.preventDefault();
-        axios.post('/posts/add', post)
+        axios.post('/api/posts/', post)
             .then(res => console.log(res.data))
 
         window.location = '/';

@@ -6,7 +6,7 @@ function EditPost(props) {
     const [editpost, setPost] = useState({ description: ''});
 
     useEffect(() => {
-        axios.get('/posts/' + props.match.params.id)
+        axios.get('api/posts/' + props.match.params.id)
             .then(response => {
                 setPost({ email: response.data.email , description: response.data.description });
             })
@@ -22,7 +22,7 @@ function EditPost(props) {
 
     function onFormSubmit(e) {
         e.preventDefault();
-        axios.put('/posts/update/' + props.match.params.id, editpost)
+        axios.put('api/posts/' + props.match.params.id, editpost)
       .then(res => console.log(res.data));
       window.location = '/';
     }
