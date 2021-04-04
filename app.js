@@ -22,10 +22,8 @@ app.use('/api/users', usersRoute);
 app.use('/api/posts', postsRoute);
 
 //Error handling
-app.use('*',(req, res, next) => {
-    const error = new Error('Not Found');
-    error.status = 404;
-    next(error);
+app.use((err, req, res, next) => {
+    next(err.stack);
 })
 
 app.use((error, req, res, next) => {
