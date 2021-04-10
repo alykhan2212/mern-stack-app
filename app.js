@@ -10,9 +10,9 @@ require('./database');
 const app = express();
 app.use(cors());
 app.use(express.json()); // replace body-parser middleware
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use('/uploads',express.static('uploads'));
+app.use('/uploads', express.static('uploads'));
 
 const usersRoute = require('./routers/users');
 const postsRoute = require('./routers/posts');
@@ -33,7 +33,7 @@ app.use((req, res, next) => {
 app.use((error, req, res, next) => {
     res.status(error.status || 500);
     res.json({
-        error:{
+        error: {
             message: error.message
         }
     });
@@ -41,7 +41,11 @@ app.use((error, req, res, next) => {
 
 //build client on production
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '/client/build')));
+    // app.use(express.static(path.join(__dirname, '/client/build')));
+    app.use(express.static(path.join(__dirname, 'client/build')));
+    app.get('/*', function (req, res) {
+        res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    });
 }
 
 module.exports = app;
